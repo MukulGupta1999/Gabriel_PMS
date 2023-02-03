@@ -1,0 +1,14 @@
+[Unit]
+Description=PTL machine HIS Group
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3 -u gabriel_his.py
+WorkingDirectory=/home/mini/usr/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=mini
+
+[Install]
+WantedBy=multi-user.target

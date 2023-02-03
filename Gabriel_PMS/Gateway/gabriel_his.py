@@ -6,7 +6,7 @@ import schedule
 
 machine_info = {
     'GDC_7': {
-        'type':'GDC_7',
+        'type': 'GDC_7',
         'ip': ' 192.168.3.19',
         'start_reg': 1,
         'reg_length': 34,
@@ -17,30 +17,30 @@ machine_info = {
     'GDC_8': {
         'type': 'GDC_8',
         'ip': ' 192.168.3.19',
-            'start_reg': 1,
-            'reg_length': 34,
-            'pName': ['Good_Count', 'Bad_Count'],
+        'start_reg': 1,
+        'reg_length': 34,
+        'pName': ['Good_Count', 'Bad_Count'],
 
-            'access_token': ""
-        },
+        'access_token': ""
+    },
     'GDC_9': {
         'type': 'GDC_9',
         'ip': ' 192.168.3.19',
-            'start_reg': 1,
-            'reg_length': 34,
-            'pName': ['Good_Count', 'Bad_Count'],
+        'start_reg': 1,
+        'reg_length': 34,
+        'pName': ['Good_Count', 'Bad_Count'],
 
-            'access_token': ""
-        },
+        'access_token': ""
+    },
     'GDC_10': {
         'type': 'GDC_10',
         'ip': ' 192.168.3.19',
-            'start_reg': 1,
-            'reg_length': 34,
-            'pName':['Good_Count', 'Bad_Count'],
+        'start_reg': 1,
+        'reg_length': 34,
+        'pName': ['Good_Count', 'Bad_Count'],
 
-            'access_token': ""
-        }
+        'access_token': ""
+    }
 }
 HOST = "10.13.4.39:8080"
 #  Every -- Seconds send data to server
@@ -85,7 +85,7 @@ def initiate_client(ip):
 def readValues(mb_client, ip, start, length):
     """reads poke yoke values from the client"""
     try:
-        if type=='GDC_7':
+        if type == 'GDC_7':
             try:
                 data1 = mb_client.read_holding_registers(5004, 1)
                 data2 = mb_client.read_holding_registers(5604, 1)
@@ -95,19 +95,19 @@ def readValues(mb_client, ip, start, length):
             except Exception as e:
                 print(datetime.datetime.now(), "Error in reading Client", ip, e, end=" ")
         elif type == 'GDC_8':
-             try:
+            try:
 
                 data1 = mb_client.read_holding_registers(5001, 1)
                 data2 = mb_client.read_holding_registers(5601, 1)
                 register_data = data1 + data2
                 print(f"got values {register_data}")
                 return register_data
-             except Exception as e:
+            except Exception as e:
                 print(datetime.datetime.now(), "Error in reading Client", ip, e, end=" ")
         elif type == 'GDC_9':
             try:
-                data1 = mb_client.read_holding_registers(5002,1)
-                data2 = mb_client.read_holding_registers(5601,1)
+                data1 = mb_client.read_holding_registers(5002, 1)
+                data2 = mb_client.read_holding_registers(5601, 1)
                 register_data = data1 + data2
                 print(f"got values {register_data}")
                 return register_data
@@ -124,6 +124,8 @@ def readValues(mb_client, ip, start, length):
                 print(datetime.datetime.now(), "Error in reading Client", ip, e, end=" ")
 
         return None
+    except Exception as e:
+        print(datetime.datetime.now(), "Error in reading Client", ip, e, end=" ")
 
 
 def post_mb_error(m_name, accessToken):
